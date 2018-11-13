@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 public class MovieControllerTest {
     private MockMvc mockMvc;
-    List<Movie> movies;
+    private List<Movie> movies;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -50,11 +50,11 @@ public class MovieControllerTest {
         m1.setRating(8.9);
         m1.setPicturePath("https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg");
         movies.add(m1);
+        when(movieService.getAll()).thenReturn(movies);
     }
 
     @Test
     public void getAll() throws Exception {
-        when(movieService.getAll()).thenReturn(movies);
 
         mockMvc.perform(get("/v1/movie"))
                 .andExpect(status().isOk())
