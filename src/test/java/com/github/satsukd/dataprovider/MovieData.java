@@ -1,5 +1,6 @@
 package com.github.satsukd.dataprovider;
 
+import com.github.satsukd.entity.Genre;
 import com.github.satsukd.entity.Movie;
 
 import java.util.ArrayList;
@@ -54,4 +55,5 @@ public class MovieData {
         int index = r.nextInt(movies.size());
         return Arrays.asList(movies.get(index));
     }
+
 }
