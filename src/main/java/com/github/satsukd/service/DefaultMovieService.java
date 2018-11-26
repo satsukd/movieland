@@ -15,7 +15,7 @@ public class DefaultMovieService implements MovieService {
 
     private MovieDao movieDao;
 
-    public DefaultMovieService(@Autowired MovieDao movieDao) {
+    DefaultMovieService(@Autowired MovieDao movieDao) {
         log.debug("DefaultMovieService constructor called with MovieDao {}", MovieDao.class);
         this.movieDao = movieDao;
     }
@@ -23,5 +23,10 @@ public class DefaultMovieService implements MovieService {
     @Override
     public List<Movie> getAll() {
         return movieDao.getAll();
+    }
+
+    @Override
+    public List<Movie> getRandom() {
+        return movieDao.getRandom();
     }
 }

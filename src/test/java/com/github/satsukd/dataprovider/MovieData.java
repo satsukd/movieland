@@ -4,7 +4,9 @@ import com.github.satsukd.entity.Genre;
 import com.github.satsukd.entity.Movie;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class MovieData {
     public static List<Movie> getMovieList() {
@@ -32,7 +34,26 @@ public class MovieData {
         m2.setPicturePath("https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg");
         movies.add(m2);
 
+        Movie m3 = new Movie();
+        m3.setId(3);
+        m3.setNameNative("The Shawshank Redemption part 3");
+        m3.setNameRussian("Побег из Шоушенка часть 3");
+        m3.setDescription("Успешный банкир Энди Дюфрейн снова, в третий раз, обвинен в убийстве собственной жены и ее любовника. Оказавшись в тюрьме под названием Шоушенк, он сталкивается с жестокостью и беззаконием, царящими по обе стороны решетки. Каждый, кто попадает в эти стены, становится их рабом до конца жизни. Но Энди, вооруженный живым умом и доброй душой, отказывается мириться с приговором судьбы и начинает разрабатывать невероятно дерзкий план своего освобождения.");
+        m3.setPrice(78.910);
+        m3.setYearOfRelease(2125);
+        m3.setRating(11);
+        m3.setPicturePath("https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg");
+        movies.add(m3);
+
+
         return movies;
+    }
+
+    public static List<Movie> getMovieRandomList() {
+        List<Movie> movies  = getMovieList();
+        Random r = new Random();
+        int index = r.nextInt(movies.size());
+        return Arrays.asList(movies.get(index));
     }
 
 }

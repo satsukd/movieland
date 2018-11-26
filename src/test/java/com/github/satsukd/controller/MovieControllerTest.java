@@ -51,7 +51,7 @@ public class MovieControllerTest {
         mockMvc.perform(get("/movie"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].id", equalTo(1)))
                 .andExpect(jsonPath("$[0].nameRussian", equalTo(actualMovies.get(0).getNameRussian())))
                 .andExpect(jsonPath("$[0].nameNative", equalTo(actualMovies.get(0).getNameNative())))
