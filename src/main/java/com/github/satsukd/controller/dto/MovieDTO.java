@@ -1,9 +1,12 @@
 package com.github.satsukd.controller.dto;
 
-import com.github.satsukd.entity.Movie;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
+@NoArgsConstructor
 public class MovieDTO {
 
     private long id;
@@ -13,16 +16,6 @@ public class MovieDTO {
     private double rating;
     private double price;
     private String picturePath;
-
-    public MovieDTO(Movie movie) {
-        this.id = movie.getId();
-        this.nameRussian = movie.getNameRussian();
-        this.nameNative = movie.getNameNative();
-        this.yearOfRelease = movie.getYearOfRelease();
-        this.rating = movie.getRating();
-        this.price = movie.getPrice();
-        this.picturePath = movie.getPicturePath();
-    }
 
     public String getYearOfRelease() {
         return Integer.toString(yearOfRelease);
