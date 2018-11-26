@@ -9,4 +9,9 @@
                 value="SELECT id, name_russian, name_native, price, rating, description, year_of_release, last_update_date, picture_path FROM movie"/>
     </bean>
 
+    <bean id="sqlGetAllGenres" class="java.lang.String">
+        <constructor-arg
+                value="SELECT id, name FROM genre"/>
+    </bean>
+
 </beans>
