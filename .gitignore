@@ -2,3 +2,5 @@
 target/
 .idea/
 database_scripts/
+logs/
+archive/
