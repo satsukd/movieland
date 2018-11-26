@@ -16,7 +16,6 @@ public class DefaultMovieService implements MovieService {
     private MovieDao movieDao;
 
     DefaultMovieService(@Autowired MovieDao movieDao) {
-        log.debug("DefaultMovieService constructor called with MovieDao {}", MovieDao.class);
         this.movieDao = movieDao;
     }
 

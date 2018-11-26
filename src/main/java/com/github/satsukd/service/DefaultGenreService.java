@@ -11,12 +11,10 @@ import java.util.List;
 
 @Service
 public class DefaultGenreService implements GenreService {
-    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private GenreDao genreDao;
 
     public DefaultGenreService(@Autowired GenreDao genreDao) {
-        log.debug("DefaultMovieService constructor called with GenreDao");
         this.genreDao = genreDao;
     }
 

@@ -19,7 +19,6 @@ public class MovieController {
     private MovieService movieService;
 
     public MovieController(@Autowired MovieService movieService) {
-        log.debug("MovieController constructor called with class {}", MovieService.class);
         this.movieService = movieService;
     }
 

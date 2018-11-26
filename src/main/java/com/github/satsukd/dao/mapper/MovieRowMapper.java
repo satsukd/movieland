@@ -2,14 +2,12 @@ package com.github.satsukd.dao.mapper;
 
 import com.github.satsukd.entity.Movie;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-@Repository
+
 public class MovieRowMapper implements RowMapper<Movie> {
 
     @Override

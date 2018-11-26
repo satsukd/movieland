@@ -12,7 +12,7 @@
         </encoder>
     </appender>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
         </layout>
@@ -20,6 +20,6 @@
 
     <logger level="DEBUG">
         <appender-ref ref="fileAppender"/>
-        <appender-ref ref="STDOUT"/>
-    </logger
+        <appender-ref ref="consoleAppender"/>
+    </logger>
 </configuration>

@@ -2,7 +2,6 @@ package com.github.satsukd.controller;
 
 import com.github.satsukd.entity.Genre;
 import com.github.satsukd.service.GenreService;
-import com.github.satsukd.service.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ public class GenreController {
     private GenreService genreService;
 
     public GenreController(@Autowired GenreService genreService) {
-        log.debug("MovieController constructor called with class {}", MovieService.class);
         this.genreService = genreService;
     }
 

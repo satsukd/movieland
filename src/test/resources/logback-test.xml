@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <appender name="lg-1" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/movieland.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>archive/movieland.%d{yyyy-MM-dd}.log.%i</fileNamePattern>
@@ -12,15 +12,15 @@
         </encoder>
     </appender>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
         </layout>
     </appender>
 
     <logger level="DEBUG">
-        <appender-ref ref="lg-1"/>
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="fileAppender"/>
+        <appender-ref ref="consoleAppender"/>
     </logger>
 
 </configuration>
