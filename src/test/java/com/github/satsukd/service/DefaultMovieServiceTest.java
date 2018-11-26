@@ -5,9 +5,6 @@ import com.github.satsukd.dataprovider.MovieData;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -22,10 +19,17 @@ public class DefaultMovieServiceTest {
     }
 
     @Test
-    public void getAll() {
+    public void testGetAll() {
         when(movieDao.getAll()).thenReturn(MovieData.getMovieList());
         MovieService movieService = new DefaultMovieService(movieDao);
-        assertEquals(2, movieService.getAll().size());
+        assertEquals(3, movieService.getAll().size());
         assertEquals(MovieData.getMovieList(), movieService.getAll());
+    }
+
+    @Test
+    public void testGetRandom() {
+        when(movieDao.getRandom()).thenReturn(MovieData.getMovieRandomList());
+        MovieService movieService = new DefaultMovieService(movieDao);
+        assertEquals(1, movieService.getRandom().size());
     }
 }
