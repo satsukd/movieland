@@ -1,4 +1,4 @@
-package com.github.satsukd.controller.facade.entity;
+package com.github.satsukd.controller.dto;
 
 import com.github.satsukd.entity.Movie;
 import org.junit.Before;
@@ -8,10 +8,10 @@ import static org.junit.Assert.assertEquals;
 
 public class MovieFacadeTest {
     private Movie movie;
-    private MovieFacade movieFacade;
+    private MovieDTO movieDTO;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp()  {
         movie = new Movie();
         movie.setId(1);
         movie.setNameRussian("Джанго");
@@ -21,40 +21,40 @@ public class MovieFacadeTest {
         movie.setRating(8.6);
         movie.setYearOfRelease(2012);
         movie.setPicturePath("some_path");
-        movieFacade = new MovieFacade(movie);
+        movieDTO = new MovieDTO(movie);
     }
 
     @Test
     public void getId() {
-        assertEquals(movieFacade.getId(), movie.getId());
+        assertEquals(movieDTO.getId(), movie.getId());
     }
 
     @Test
     public void getNameRussian() {
-        assertEquals(movieFacade.getNameRussian(), movie.getNameRussian());    }
+        assertEquals(movieDTO.getNameRussian(), movie.getNameRussian());    }
 
     @Test
     public void getNameNative() {
-        assertEquals(movieFacade.getNameNative(), movie.getNameNative());
+        assertEquals(movieDTO.getNameNative(), movie.getNameNative());
     }
 
     @Test
     public void getYearOfRelease() {
-        assertEquals(Integer.parseInt(movieFacade.getYearOfRelease()), movie.getYearOfRelease());
+        assertEquals(Integer.parseInt(movieDTO.getYearOfRelease()), movie.getYearOfRelease());
     }
 
     @Test
     public void getRating() {
-        assertEquals(movieFacade.getRating(), movie.getRating(), 0.00001);
+        assertEquals(movieDTO.getRating(), movie.getRating(), 0.00001);
     }
 
     @Test
     public void getPrice() {
-        assertEquals(movieFacade.getPrice(), movie.getPrice(), 0.00001);
+        assertEquals(movieDTO.getPrice(), movie.getPrice(), 0.00001);
     }
 
     @Test
     public void getPicturePath() {
-        assertEquals(movieFacade.getPicturePath(), movie.getPicturePath());
+        assertEquals(movieDTO.getPicturePath(), movie.getPicturePath());
     }
 }

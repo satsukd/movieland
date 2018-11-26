@@ -1,10 +1,10 @@
-package com.github.satsukd.controller.facade.entity
+package com.github.satsukd.controller.dto
 
 import com.github.satsukd.entity.Movie
 import spock.lang.Specification
 
 class MovieFacadeGroovyTest extends Specification {
-    private movieFacade
+    private movieDTO
     private movie
 
     void setup() {
@@ -12,32 +12,32 @@ class MovieFacadeGroovyTest extends Specification {
         movie.setId(1)
         movie.setNameRussian("Джанго")
         movie.setNameNative("Django")
-        movie.setDescription("Длинное описание ... и этого метода не должно быть в MovieFacade")
+        movie.setDescription("Длинное описание ... и этого метода не должно быть в MovieDTO")
         movie.setPrice(15.15)
         movie.setRating(8.6)
         movie.setYearOfRelease(2012)
         movie.setPicturePath("some_path")
-        movieFacade = new MovieFacade(movie)
+        movieDTO = new MovieDTO(movie)
     }
 
     def "GetId"() {
         expect:
-        movie.getId() == movieFacade.getId()
+        movie.getId() == movieDTO.getId()
     }
 
     def "GetNameRussian"() {
         expect:
-        movie.getNameRussian() == movieFacade.getNameRussian()
+        movie.getNameRussian() == movieDTO.getNameRussian()
     }
 
     def "GetNameNative"() {
         expect:
-        movie.getNameNative() == movieFacade.getNameNative()
+        movie.getNameNative() == movieDTO.getNameNative()
     }
 
     def "GetYearOfRelease"() {
         when: 'parse String value to int'
-        def yearOfRelease = Integer.parseInt(movieFacade.getYearOfRelease())
+        def yearOfRelease = Integer.parseInt(movieDTO.getYearOfRelease())
 
         then: 'Compare converted results'
         movie.getYearOfRelease() == yearOfRelease
@@ -45,22 +45,22 @@ class MovieFacadeGroovyTest extends Specification {
 
     def "GetRating"() {
         expect:
-        movie.getRating() == movieFacade.getRating()
+        movie.getRating() == movieDTO.getRating()
     }
 
     def "GetPrice"() {
         expect:
-        movie.getPrice() == movieFacade.getPrice()
+        movie.getPrice() == movieDTO.getPrice()
     }
 
     def "GetPicturePath"() {
         expect:
-        movie.getPicturePath() == movieFacade.getPicturePath()
+        movie.getPicturePath() == movieDTO.getPicturePath()
     }
 
     def "GetDescription"() {
         when: 'call to not existing method'
-        def description = movieFacade.getDescription()
+        def description = movieDTO.getDescription()
 
         then: 'exception must be thrown'
         thrown MissingMethodException

@@ -37,7 +37,7 @@ public class MovieControllerTest {
     private MovieService movieService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         movies = MovieData.getMovieList();
         when(movieService.getAll()).thenReturn(movies);
@@ -48,7 +48,7 @@ public class MovieControllerTest {
 
         List<Movie> actualMovies = MovieData.getMovieList();
 
-        mockMvc.perform(get("/v1/movie"))
+        mockMvc.perform(get("/movie"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$", hasSize(2)))

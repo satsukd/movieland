@@ -18,7 +18,7 @@
 
     <servlet-mapping>
         <servlet-name>rest-api</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/v1/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

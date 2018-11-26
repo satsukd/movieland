@@ -1,4 +1,4 @@
-package com.github.satsukd.dao.impl;
+package com.github.satsukd.dao.jdbc;
 
 import com.github.satsukd.dao.MovieDao;
 import com.github.satsukd.dao.mapper.MovieRowMapper;
@@ -13,11 +13,14 @@ import java.util.List;
 public class DefaultMovieDao implements MovieDao {
     private static final MovieRowMapper MOVIE_ROW_MAPPER = new MovieRowMapper();
 
-    @Autowired
-    String sqlGetAllMovies;
+    private String sqlGetAllMovies;
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    public DefaultMovieDao(String sqlGetAllMovies, JdbcTemplate jdbcTemplate) {
+        this.sqlGetAllMovies = sqlGetAllMovies;
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<Movie> getAll() {
