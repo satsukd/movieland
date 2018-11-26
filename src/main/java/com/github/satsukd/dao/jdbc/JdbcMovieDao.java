@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class DefaultMovieDao implements MovieDao {
+public class JdbcMovieDao implements MovieDao {
     private static final MovieRowMapper MOVIE_ROW_MAPPER = new MovieRowMapper();
 
     private String sqlGetAllMovies;
@@ -18,7 +18,7 @@ public class DefaultMovieDao implements MovieDao {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public DefaultMovieDao(JdbcTemplate jdbcTemplate) {
+    public JdbcMovieDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
