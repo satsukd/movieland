@@ -25,12 +25,20 @@ public class MovieController {
 
     @GetMapping(path = {"/movie"})
     public List<MovieDTO> getAll() {
-        List<Movie> movies = movieService.getAll();
-        List<MovieDTO> moviesFacade = new ArrayList<>();
+        return wrappMovie(movieService.getAll());
+    }
+
+    @GetMapping(path = {"/movie/random"})
+    public List<MovieDTO> getRandomMovie() {
+        return wrappMovie(movieService.getRandom());
+    }
+
+    private List<MovieDTO> wrappMovie(List<Movie> movies) {
+        List<MovieDTO> moviesDTO = new ArrayList<>();
         for (Movie movie : movies) {
-            moviesFacade.add(new MovieDTO(movie));
+            moviesDTO.add(new MovieDTO(movie));
         }
 
-        return moviesFacade;
+        return moviesDTO;
     }
 }
