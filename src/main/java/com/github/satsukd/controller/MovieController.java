@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -32,6 +33,11 @@ public class MovieController {
     @GetMapping(path = {"/movie/random"})
     public List<MovieDTO> getRandomMovie() {
         return wrappMovie(movieService.getRandom());
+    }
+
+    @GetMapping(path = {"/movie/genre/{genreId}"})
+    public List<MovieDTO> getMovieByGenreId(@PathVariable int genreId) {
+        return wrappMovie(movieService.getByGenreId(genreId));
     }
 
     private List<MovieDTO> wrappMovie(List<Movie> movies) {

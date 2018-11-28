@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,5 +33,13 @@ public class DefaultMovieServiceTest {
         when(movieDao.getRandom()).thenReturn(MovieData.getMovieRandomList());
         MovieService movieService = new DefaultMovieService(movieDao);
         assertEquals(1, movieService.getRandom().size());
+    }
+
+    @Test
+    public void testGetMovieByGenreId() {
+        when(movieDao.getByGenreId(anyInt())).thenReturn(MovieData.getMovieList());
+        MovieService movieService = new DefaultMovieService(movieDao);
+        assertEquals(3, movieService.getByGenreId(anyInt()).size());
+        assertEquals(MovieData.getMovieList(), movieService.getByGenreId(anyInt()));
     }
 }

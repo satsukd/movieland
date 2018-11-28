@@ -3,7 +3,7 @@ package com.github.satsukd.controller.dto
 import com.github.satsukd.entity.Movie
 import spock.lang.Specification
 
-class MovieFacadeGroovyTest extends Specification {
+class MovieDTOGroovyTest extends Specification {
     private movieDTO
     private movie
 
@@ -17,7 +17,14 @@ class MovieFacadeGroovyTest extends Specification {
         movie.setRating(8.6)
         movie.setYearOfRelease(2012)
         movie.setPicturePath("some_path")
-        movieDTO = new MovieDTO(movie)
+        movieDTO = new MovieDTO()
+        movieDTO.setId(1)
+        movieDTO.setNameRussian("Джанго")
+        movieDTO.setNameNative("Django")
+        movieDTO.setPrice(15.15)
+        movieDTO.setRating(8.6)
+        movieDTO.setYearOfRelease(2012)
+        movieDTO.setPicturePath("some_path")
     }
 
     def "GetId"() {
