@@ -1,8 +1,10 @@
 package com.github.satsukd.entity;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Data
+@Getter
+@AllArgsConstructor
 public class Genre {
     private long id;
     private String name;

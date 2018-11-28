@@ -20,25 +20,23 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Primary
 public class CachedGenreDao implements GenreDao {
     private final Logger log = LoggerFactory.getLogger(getClass());
-    private List<Genre> genres = new CopyOnWriteArrayList<Genre>();
+    private volatile List<Genre> genres = new CopyOnWriteArrayList<>();
     private JdbcGenreDao genreDao;
 
     @Override
     public List<Genre> getAll() {
-        log.debug("Executed getAll() over CachedGenreDao");
-        return genres;
+        return new ArrayList<>(genres);
     }
 
     @Autowired
     public CachedGenreDao(JdbcGenreDao genreDao) {
-        log.debug("Called constructor of GenreDao with {}", genreDao.getClass());
         this.genreDao = genreDao;
     }
 
     @PostConstruct
     public void init() {
         log.debug("Executed init() over CachedGenreDao");
-        genres = new ArrayList<>(genreDao.getAll());
+        genres = genreDao.getAll();
     }
 
     @Scheduled(initialDelayString = "${scheduler.initialDelay}", fixedRateString = "${scheduler.fixedDelay}")
