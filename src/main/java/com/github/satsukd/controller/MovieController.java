@@ -60,15 +60,13 @@ public class MovieController {
         if (movieRequestParamsDto.getPrice() != null) {
             OrderClause orderClause = OrderClause.getOrderClause(movieRequestParamsDto.getPrice());
             OrderClause.getOrderClause(movieRequestParamsDto.getPrice());
-            FiledNames filedNames = FiledNames.getFieldNames("price");
-            movieRequestParamsDto.addOrderClause( filedNames, orderClause);
+            movieRequestParamsDto.addOrderClause(FiledNames.PRICE, orderClause);
         }
 
         if (movieRequestParamsDto.getRating() != null) {
             OrderClause orderClause = OrderClause.getOrderClause(movieRequestParamsDto.getRating());
             OrderClause.getOrderClause(movieRequestParamsDto.getRating());
-            FiledNames filedNames = FiledNames.getFieldNames("rating");
-            movieRequestParamsDto.addOrderClause( filedNames, orderClause);
+            movieRequestParamsDto.addOrderClause(FiledNames.RATING, orderClause);
         }
     }
 }
