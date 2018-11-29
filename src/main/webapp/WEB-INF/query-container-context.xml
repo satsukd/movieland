@@ -6,7 +6,7 @@
 
     <bean id="sqlGetAllMovies" class="java.lang.String">
         <constructor-arg
-                value="SELECT id, name_russian, name_native, price, rating, description, year_of_release, last_update_date, picture_path FROM movie"/>
+                value="SELECT id, name_russian, name_native, price, rating, description, year_of_release, last_update_date, picture_path FROM movie m "/>
     </bean>
 
    <bean id="sqlGetRandomMovies" class="java.lang.String">
@@ -19,7 +19,7 @@
     </bean>
 
     <bean id="sqlGetMoviesByGenreId" class="java.lang.String">
-        <constructor-arg value="SELECT m.id, m.name_russian, m.name_native, m.price, m.rating, m.description, m.year_of_release, m.last_update_date, m.picture_path FROM movie m join movie_2_genre g on m.id = g.movie_id where g.genre_id = ?"/>
+        <constructor-arg value="SELECT m.id, m.name_russian, m.name_native, m.price, m.rating, m.description, m.year_of_release, m.last_update_date, m.picture_path FROM movie m join movie_2_genre g on m.id = g.movie_id where g.genre_id = ? "/>
     </bean>
 
 </beans>
