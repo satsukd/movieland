@@ -22,10 +22,10 @@ public class DefaultMovieServiceTest {
 
     @Test
     public void testGetAll() {
-        when(movieDao.getAll()).thenReturn(MovieData.getMovieList());
+        when(movieDao.getAll(any())).thenReturn(MovieData.getMovieList());
         MovieService movieService = new DefaultMovieService(movieDao);
-        assertEquals(3, movieService.getAll().size());
-        assertEquals(MovieData.getMovieList(), movieService.getAll());
+        assertEquals(3, movieService.getAll(any()).size());
+        assertEquals(MovieData.getMovieList(), movieService.getAll(any()));
     }
 
     @Test
@@ -37,9 +37,9 @@ public class DefaultMovieServiceTest {
 
     @Test
     public void testGetMovieByGenreId() {
-        when(movieDao.getByGenreId(anyInt())).thenReturn(MovieData.getMovieList());
+        when(movieDao.getByGenreId(anyInt(), any())).thenReturn(MovieData.getMovieList());
         MovieService movieService = new DefaultMovieService(movieDao);
-        assertEquals(3, movieService.getByGenreId(anyInt()).size());
-        assertEquals(MovieData.getMovieList(), movieService.getByGenreId(anyInt()));
+        assertEquals(3, movieService.getByGenreId(anyInt(),any()).size());
+        assertEquals(MovieData.getMovieList(), movieService.getByGenreId(anyInt(),any()));
     }
 }

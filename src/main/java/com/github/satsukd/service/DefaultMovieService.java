@@ -1,5 +1,6 @@
 package com.github.satsukd.service;
 
+import com.github.satsukd.controller.dto.MovieRequestParamsDto;
 import com.github.satsukd.dao.MovieDao;
 import com.github.satsukd.entity.Movie;
 import org.slf4j.Logger;
@@ -20,8 +21,8 @@ public class DefaultMovieService implements MovieService {
     }
 
     @Override
-    public List<Movie> getAll() {
-        return movieDao.getAll();
+    public List<Movie> getAll(MovieRequestParamsDto requestParamsDto) {
+        return movieDao.getAll(requestParamsDto);
     }
 
     @Override
@@ -30,8 +31,8 @@ public class DefaultMovieService implements MovieService {
     }
 
     @Override
-    public List<Movie> getByGenreId(int genreId) {
-        return movieDao.getByGenreId(genreId);
+    public List<Movie> getByGenreId(int genreId, MovieRequestParamsDto requestParamsDto) {
+        return movieDao.getByGenreId(genreId, requestParamsDto);
     }
 
 

@@ -1,5 +1,6 @@
 package com.github.satsukd.controller;
 
+import com.github.satsukd.controller.dto.MovieRequestParamsDto;
 import com.github.satsukd.dataprovider.MovieData;
 import com.github.satsukd.entity.Movie;
 import com.github.satsukd.service.MovieService;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -45,7 +47,7 @@ public class MovieControllerTest {
 
     @Test
     public void getAll() throws Exception {
-        when(movieService.getAll()).thenReturn(movies);
+        when(movieService.getAll(any())).thenReturn(movies);
         List<Movie> actualMovies = MovieData.getMovieList();
 
         mockMvc.perform(get("/movie"))
@@ -68,9 +70,10 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$[1].picturePath", equalTo(actualMovies.get(1).getPicturePath())));
     }
 
+
     @Test
     public void getMoviesByGenre() throws Exception {
-        when(movieService.getByGenreId(anyInt())).thenReturn(movies);
+        when(movieService.getByGenreId(anyInt(), any())).thenReturn(movies);
         List<Movie> actualMovies = MovieData.getMovieList();
 
         mockMvc.perform(get("/movie/genre/1"))
@@ -91,5 +94,37 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$[1].rating", equalTo(actualMovies.get(1).getRating())))
                 .andExpect(jsonPath("$[1].price", equalTo(actualMovies.get(1).getPrice())))
                 .andExpect(jsonPath("$[1].picturePath", equalTo(actualMovies.get(1).getPicturePath())));
+    }
+
+    @Test
+    public void testValidateRequestParamsDto() {
+        MovieController movieController = new MovieController(movieService);
+        MovieRequestParamsDto movieRequestParamsDto = new MovieRequestParamsDto();
+        movieRequestParamsDto.setPrice("desc");
+        movieRequestParamsDto.setPrice("asc");
+        movieController.validateRequestParamsDto(movieRequestParamsDto);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testValidateRequestParamsDtoExceptionRaisedForPrice() {
+        MovieController movieController = new MovieController(movieService);
+        MovieRequestParamsDto movieRequestParamsDto = new MovieRequestParamsDto();
+        movieRequestParamsDto.setPrice("test");
+        movieController.validateRequestParamsDto(movieRequestParamsDto);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testValidateRequestParamsDtoExceptionRaisedForRating() {
+        MovieController movieController = new MovieController(movieService);
+        MovieRequestParamsDto movieRequestParamsDto = new MovieRequestParamsDto();
+        movieRequestParamsDto.setRating("test");
+        movieController.validateRequestParamsDto(movieRequestParamsDto);
+    }
+
+    @Test
+    public void testValidateRequestParamsDtoNull() {
+        MovieController movieController = new MovieController(movieService);
+        MovieRequestParamsDto movieRequestParamsDto = new MovieRequestParamsDto();
+        movieController.validateRequestParamsDto(movieRequestParamsDto);
     }
 }
