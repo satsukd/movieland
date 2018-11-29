@@ -12,14 +12,9 @@ public class GenreRowMapper implements RowMapper<Genre> {
     @Override
     public Genre mapRow(ResultSet resultSet, int i) throws SQLException {
 
-        Genre genre = new Genre();
-
         int id = resultSet.getInt("id");
         String name = resultSet.getString("name");
 
-        genre.setId(id);
-        genre.setName(name);
-
-        return genre;
+        return new Genre(id, name);
     }
 }

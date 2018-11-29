@@ -10,14 +10,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class DefaultGenreDao implements GenreDao {
+public class JdbcGenreDao implements GenreDao {
     private static final GenreRowMapper GENRE_ROW_MAPPER = new GenreRowMapper();
 
     private String sqlGetAllGenres;
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public DefaultGenreDao(JdbcTemplate jdbcTemplate) {
+    public JdbcGenreDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
