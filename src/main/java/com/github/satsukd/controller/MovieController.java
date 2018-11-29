@@ -1,6 +1,7 @@
 package com.github.satsukd.controller;
 
 import com.github.satsukd.controller.dto.MovieDTO;
+import com.github.satsukd.controller.dto.RequestParamsDto;
 import com.github.satsukd.entity.Movie;
 import com.github.satsukd.service.MovieService;
 import org.modelmapper.ModelMapper;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -26,7 +28,8 @@ public class MovieController {
     }
 
     @GetMapping(path = {"/movie"})
-    public List<MovieDTO> getAll() {
+    public List<MovieDTO> getAll(@ModelAttribute RequestParamsDto requestParamsDto) {
+        log.debug("RequestParamsDto: {}", requestParamsDto);
         return wrappMovie(movieService.getAll());
     }
 
