@@ -8,8 +8,4 @@ public enum FiledNames {
     RATING("RATING");
 
     private String fieldName;
-
-    public static FiledNames getFieldNames(String fieldName) {
-        return FiledNames.valueOf(fieldName.trim().toUpperCase());
-    }
 }
