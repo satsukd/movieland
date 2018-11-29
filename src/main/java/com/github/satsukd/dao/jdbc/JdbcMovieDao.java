@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.StringJoiner;
 
 @Repository
-public class DefaultMovieDao implements MovieDao {
+public class JdbcMovieDao implements MovieDao {
     private static final MovieRowMapper MOVIE_ROW_MAPPER = new MovieRowMapper();
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -27,7 +27,7 @@ public class DefaultMovieDao implements MovieDao {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public DefaultMovieDao(JdbcTemplate jdbcTemplate) {
+    public JdbcMovieDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

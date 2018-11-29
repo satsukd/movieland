@@ -5,3 +5,6 @@ jdbc:
   password : root
   initialSize : 2
   maxTotal : 10
+scheduler:
+  initialDelay : 1000
+  fixedDelay : 14400000
