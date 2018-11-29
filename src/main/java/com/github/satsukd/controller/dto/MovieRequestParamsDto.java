@@ -3,7 +3,7 @@ package com.github.satsukd.controller.dto;
 import lombok.Data;
 
 @Data
-public class RequestParamsDto {
+public class MovieRequestParamsDto {
     String rating;
     String price;
 }

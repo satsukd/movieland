@@ -1,7 +1,7 @@
 package com.github.satsukd.controller;
 
 import com.github.satsukd.controller.dto.MovieDTO;
-import com.github.satsukd.controller.dto.RequestParamsDto;
+import com.github.satsukd.controller.dto.MovieRequestParamsDto;
 import com.github.satsukd.entity.Movie;
 import com.github.satsukd.service.MovieService;
 import org.modelmapper.ModelMapper;
@@ -27,9 +27,9 @@ public class MovieController {
     }
 
     @GetMapping(path = {"/movie"})
-    public List<MovieDTO> getAll(@ModelAttribute RequestParamsDto requestParamsDto) {
-        log.debug("RequestParamsDto: {}", requestParamsDto);
-        return wrappMovie(movieService.getAll());
+    public List<MovieDTO> getAll(@ModelAttribute MovieRequestParamsDto requestParamsDto) {
+        log.debug("MovieRequestParamsDto: {}", requestParamsDto);
+        return wrappMovie(movieService.getAll(requestParamsDto));
     }
 
     @GetMapping(path = {"/movie/random"})
