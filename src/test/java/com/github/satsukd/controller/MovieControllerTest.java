@@ -19,6 +19,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -40,15 +41,39 @@ public class MovieControllerTest {
     public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         movies = MovieData.getMovieList();
-        when(movieService.getAll()).thenReturn(movies);
     }
 
     @Test
     public void getAll() throws Exception {
-
+        when(movieService.getAll()).thenReturn(movies);
         List<Movie> actualMovies = MovieData.getMovieList();
 
         mockMvc.perform(get("/movie"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$", hasSize(3)))
+                .andExpect(jsonPath("$[0].id", equalTo(1)))
+                .andExpect(jsonPath("$[0].nameRussian", equalTo(actualMovies.get(0).getNameRussian())))
+                .andExpect(jsonPath("$[0].nameNative", equalTo(actualMovies.get(0).getNameNative())))
+                .andExpect(jsonPath("$[0].yearOfRelease", equalTo(((Integer) actualMovies.get(0).getYearOfRelease()).toString())))
+                .andExpect(jsonPath("$[0].rating", equalTo(actualMovies.get(0).getRating())))
+                .andExpect(jsonPath("$[0].price", equalTo(actualMovies.get(0).getPrice())))
+                .andExpect(jsonPath("$[0].picturePath", equalTo(actualMovies.get(0).getPicturePath())))
+                .andExpect(jsonPath("$[1].id", equalTo(2)))
+                .andExpect(jsonPath("$[1].nameRussian", equalTo(actualMovies.get(1).getNameRussian())))
+                .andExpect(jsonPath("$[1].nameNative", equalTo(actualMovies.get(1).getNameNative())))
+                .andExpect(jsonPath("$[1].yearOfRelease", equalTo(((Integer) actualMovies.get(1).getYearOfRelease()).toString())))
+                .andExpect(jsonPath("$[1].rating", equalTo(actualMovies.get(1).getRating())))
+                .andExpect(jsonPath("$[1].price", equalTo(actualMovies.get(1).getPrice())))
+                .andExpect(jsonPath("$[1].picturePath", equalTo(actualMovies.get(1).getPicturePath())));
+    }
+
+    @Test
+    public void getMoviesByGenre() throws Exception {
+        when(movieService.getByGenreId(anyInt())).thenReturn(movies);
+        List<Movie> actualMovies = MovieData.getMovieList();
+
+        mockMvc.perform(get("/movie/genre/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$", hasSize(3)))
