@@ -1,5 +1,7 @@
 package com.github.satsukd.dao.cache;
 
+import com.github.satsukd.configuration.TestCacheConfiguration;
+import com.github.satsukd.configuration.TestJdbcConfiguration;
 import com.github.satsukd.dao.jdbc.JdbcGenreDao;
 import com.github.satsukd.entity.Genre;
 import org.junit.Test;
@@ -13,7 +15,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring/jdbc-context-liquibase-test.xml", "classpath:spring/jdbc-context-cached-test.xml"})
+@ContextConfiguration(classes = {TestJdbcConfiguration.class, TestCacheConfiguration.class})
 public class CachedGenreDaoITest {
 
     @Autowired

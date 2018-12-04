@@ -1,5 +1,6 @@
 package com.github.satsukd.dao.jdbc;
 
+import com.github.satsukd.configuration.TestJdbcConfiguration;
 import com.github.satsukd.dto.FiledNames;
 import com.github.satsukd.dto.MovieRequestParamsDto;
 import com.github.satsukd.dto.OrderClause;
@@ -15,7 +16,8 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring/jdbc-context-liquibase-test.xml"})
+//@ContextConfiguration(classes = TestJdbcConfiguration.class)
+@ContextConfiguration(locations = "classpath:spring/jdbc-context-liquibase-test.xml")
 public class JdbcMovieDaoITest {
 
     @Autowired

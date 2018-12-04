@@ -1,5 +1,7 @@
 package com.github.satsukd.controller;
 
+import com.github.satsukd.configuration.TestApplicationConfig;
+import com.github.satsukd.configuration.TestWebConfig;
 import com.github.satsukd.dataprovider.MovieData;
 import com.github.satsukd.dto.MovieRequestParamsDto;
 import com.github.satsukd.entity.Movie;
@@ -27,8 +29,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/applicationContext.xml", "file:src/main/webapp/WEB-INF/rest-api-servlet.xml", "file:src/main/webapp/WEB-INF/rest-api-servlet.xml", "classpath:applicationContext-test.xml"})
+@ContextConfiguration(classes = {TestApplicationConfig.class, TestWebConfig.class})
 @WebAppConfiguration
+
 public class MovieControllerTest {
     private MockMvc mockMvc;
     private List<Movie> movies;
