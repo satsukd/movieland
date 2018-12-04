@@ -19,11 +19,6 @@
             <artifactId>movieland-service-default</artifactId>
             <version>1.6-SNAPSHOT</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.github.satsukd</groupId>-->
-            <!--<artifactId>movieland-service</artifactId>-->
-            <!--<version>1.6-SNAPSHOT</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.github.satsukd</groupId>
             <artifactId>movieland-dao-jdbc</artifactId>
