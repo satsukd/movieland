@@ -1,6 +1,6 @@
 jdbc:
   driver : org.h2.Driver
-  url : jdbc:h2:~/test;AUTO_SERVER=TRUE
+  url : jdbc:h2:~/test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
   username : sa
   password : sa
   initialSize : 1
