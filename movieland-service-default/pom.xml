@@ -10,19 +10,27 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>movieland-service-default</artifactId>
+
+
+
+
     <dependencies>
         <dependency>
             <groupId>com.github.satsukd</groupId>
             <artifactId>movieland-service</artifactId>
-            <version>1.6-SNAPSHOT</version>
-            <scope>compile</scope>
+            <version>${app.version}</version>
         </dependency>
         <!-- logs -->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -41,6 +49,7 @@
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
 

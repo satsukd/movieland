@@ -15,33 +15,21 @@
         <dependency>
             <groupId>com.github.satsukd</groupId>
             <artifactId>movieland-dao</artifactId>
-            <version>1.6-SNAPSHOT</version>
-            <scope>compile</scope>
+            <version>${app.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.satsukd</groupId>
-            <artifactId>movieland-entity</artifactId>
-            <version>1.6-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
         <!-- spring -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.framework}</version>
+            <artifactId>spring-jdbc</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.framework}</version>
+            <artifactId>spring-context</artifactId>
         </dependency>
-
         <!-- logs -->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
 
         <dependency>
@@ -51,10 +39,6 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
         </dependency>
 
         <!-- test -->
@@ -66,6 +50,11 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
 
