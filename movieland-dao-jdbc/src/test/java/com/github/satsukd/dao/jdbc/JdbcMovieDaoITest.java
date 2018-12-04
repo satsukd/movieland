@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring/jdbc-context-test.xml"})
+@ContextConfiguration(locations = {"classpath:spring/jdbc-context-liquibase-test.xml"})
 public class JdbcMovieDaoITest {
 
     @Autowired

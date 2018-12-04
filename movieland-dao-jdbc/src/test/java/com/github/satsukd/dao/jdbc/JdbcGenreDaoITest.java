@@ -12,8 +12,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring/jdbc-context-test.xml"})
-public class JdbcGenreDaoTest {
+@ContextConfiguration(locations = {"classpath:spring/jdbc-context-liquibase-test.xml"})
+public class JdbcGenreDaoITest {
 
     @Autowired
     private JdbcGenreDao jdbcGenreDao;

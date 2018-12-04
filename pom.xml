@@ -24,6 +24,7 @@
         <json-path.version>2.4.0</json-path.version>
         <postgre.version>42.2.5</postgre.version>
         <h2.version>1.4.197</h2.version>
+        <liquibase.version>3.6.2</liquibase.version>
         <commons-dbcp2.version>2.5.0</commons-dbcp2.version>
         <modelmapper.version>2.3.0</modelmapper.version>
         <jackson.version>2.9.7</jackson.version>
@@ -70,24 +71,17 @@
                 <version>${spring.framework}</version>
             </dependency>
 
-             <!--db-part-->
+            <!--db-part-->
             <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgre.version}</version>
-            </dependency>
-             <!--tmp insead of postgre-->
-            <dependency>
-                <groupId>com.h2database</groupId>
-                <artifactId>h2</artifactId>
-                <version>${h2.version}</version>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgre.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-dbcp2</artifactId>
                 <version>${commons-dbcp2.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.modelmapper</groupId>
                 <artifactId>modelmapper</artifactId>
@@ -169,6 +163,19 @@
                 <version>${spock.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>${liquibase.version}</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>

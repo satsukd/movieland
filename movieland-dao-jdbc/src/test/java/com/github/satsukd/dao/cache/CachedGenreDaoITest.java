@@ -13,8 +13,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring/jdbc-context-test.xml", "classpath:spring/jdbc-context-cached-test.xml"})
-public class CachedGenreDaoTest {
+@ContextConfiguration(locations = {"classpath:spring/jdbc-context-liquibase-test.xml", "classpath:spring/jdbc-context-cached-test.xml"})
+public class CachedGenreDaoITest {
 
     @Autowired
     private JdbcGenreDao jdbcGenreDao;

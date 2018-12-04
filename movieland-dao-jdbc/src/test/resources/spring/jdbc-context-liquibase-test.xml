@@ -22,7 +22,7 @@
     </bean>
 
     <bean id="yamlProperties" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">
-        <property name="resources" value="classpath:db/properties.yml"/>
+        <property name="resources" value="classpath:db/properties-liquibase.yml"/>
     </bean>
 
     <context:property-placeholder properties-ref="yamlProperties"/>
@@ -36,11 +36,10 @@
         <property name="maxTotal" value="${jdbc.maxTotal}"/>
     </bean>
 
-    <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="classpath:db/init-script/db-drop-schema.sql"/>
-        <jdbc:script location="classpath:db/init-script/db-schema.sql"/>
-        <jdbc:script location="classpath:db/init-script/db-test-data.sql"/>
-    </jdbc:initialize-database>
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="changeLog" value="classpath:db/liquibase/databaseChangeLog.xml"/>
+    </bean>
 
     <context:component-scan
             base-package="com.github.satsukd.dao.jdbc">
