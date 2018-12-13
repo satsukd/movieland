@@ -13,12 +13,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = TestJdbcConfiguration.class)
-@ContextConfiguration(locations = "classpath:spring/jdbc-context-liquibase-test.xml")
+@ContextConfiguration(classes = TestJdbcConfiguration.class)
 public class JdbcMovieDaoITest {
+
+    private static final String ONE_QUALS_ONE = "1 = 1";
 
     @Autowired
     private JdbcMovieDao jdbcMovieDao;
@@ -48,18 +50,17 @@ public class JdbcMovieDaoITest {
 
     @Test
     public void applyRequestParamsEmptyParamsDto() {
-        String expectedQuery = "1 = 1";
-        String actualQuery = jdbcMovieDao.applyRequestParams("1 = 1", requestParamsDto);
-        assertEquals(expectedQuery, actualQuery);
+        String actualQuery = jdbcMovieDao.applyRequestParams(ONE_QUALS_ONE, requestParamsDto);
+        assertEquals(ONE_QUALS_ONE, actualQuery);
     }
 
     @Test
     public void applyRequestParamsNotEmptyParamsDto() {
         String expectedQuery = "1 = 1 ORDER BY PRICE ASC ";
 
-        MovieRequestParamsDto requestParamsDto = new  MovieRequestParamsDto();
-        requestParamsDto.getOrderedFields().put(FiledNames.PRICE, OrderClause.ASC);
-        String actualQuery = jdbcMovieDao.applyRequestParams("1 = 1", requestParamsDto);
+        MovieRequestParamsDto requestParamsDtoObj = new  MovieRequestParamsDto();
+        requestParamsDtoObj.getOrderedFields().put(FiledNames.PRICE, OrderClause.ASC);
+        String actualQuery = jdbcMovieDao.applyRequestParams(ONE_QUALS_ONE, requestParamsDtoObj);
         assertEquals(expectedQuery, actualQuery);
     }
 }

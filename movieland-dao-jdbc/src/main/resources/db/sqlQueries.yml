@@ -1,0 +1,7 @@
+query:
+  movie:
+    sqlGetAllMovies : SELECT id, name_russian, name_native, price, rating, description, year_of_release, last_update_date, picture_path FROM movie m
+    sqlGetRandomMovies : SELECT id, name_russian, name_native, price, rating, description, year_of_release, last_update_date, picture_path FROM movie where RANDOM() < 0.5 LIMIT 3
+    sqlGetMoviesByGenreId : SELECT m.id, m.name_russian, m.name_native, m.price, m.rating, m.description, m.year_of_release, m.last_update_date, m.picture_path FROM movie m join movie_2_genre g on m.id = g.movie_id where g.genre_id = ?
+  genre:
+    sqlGetAllGenres : SELECT id, name FROM genre

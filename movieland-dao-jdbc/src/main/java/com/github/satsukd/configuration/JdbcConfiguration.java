@@ -8,7 +8,6 @@ import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,23 +16,22 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import javax.sql.DataSource;
 
 @Configuration
-@ImportResource("classpath:spring/query-container-context.xml")
+//@ImportResource("classpath:spring/old-query-container-context.xml")
 @EnableScheduling
 @ComponentScan(basePackages = {"com.github.satsukd.dao.jdbc", "com.github.satsukd.dao.cache"})
 public class JdbcConfiguration {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private static final Logger logger = LoggerFactory.getLogger(JdbcConfiguration.class);
 
     @Bean
-    JdbcTemplate jdbcTemplate(DataSource dataSource)
-    {
+    JdbcTemplate jdbcTemplate(DataSource dataSource) {
         logger.debug("called jdbcTemplate bean");
         return new JdbcTemplate(dataSource);
     }
 
 
     @Bean
-    public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholder(YamlPropertiesFactoryBean yamlPropertiesFactoryBean) {
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholder(YamlPropertiesFactoryBean yamlPropertiesFactoryBean) {
         logger.debug("called propertySourcesPlaceholder bean");
         PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
         propertySourcesPlaceholderConfigurer.setProperties(yamlPropertiesFactoryBean.getObject());
@@ -44,7 +42,7 @@ public class JdbcConfiguration {
     YamlPropertiesFactoryBean yamlProperties() {
         logger.debug("called yamlProperties bean");
         YamlPropertiesFactoryBean yamlPropertiesFactoryBean = new YamlPropertiesFactoryBean();
-        yamlPropertiesFactoryBean.setResources(new ClassPathResource("db/properties.yml"));
+        yamlPropertiesFactoryBean.setResources(new ClassPathResource("db/properties.yml"), new ClassPathResource("db/sqlQueries.yml"));
         return yamlPropertiesFactoryBean;
     }
 

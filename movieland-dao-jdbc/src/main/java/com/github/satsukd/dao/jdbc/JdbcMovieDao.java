@@ -9,6 +9,7 @@ import com.github.satsukd.entity.Movie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -32,17 +33,17 @@ public class JdbcMovieDao implements MovieDao {
     }
 
     @Autowired
-    public void setSqlGetAllMovies(String sqlGetAllMovies) {
+    public void setSqlGetAllMovies(@Value("${query.movie.sqlGetAllMovies}") String sqlGetAllMovies) {
         this.sqlGetAllMovies = sqlGetAllMovies;
     }
 
     @Autowired
-    public void setSqlGetRandomMovies(String sqlGetRandomMovies) {
+    public void setSqlGetRandomMovies(@Value("${query.movie.sqlGetRandomMovies}") String sqlGetRandomMovies) {
         this.sqlGetRandomMovies = sqlGetRandomMovies;
     }
 
     @Autowired
-    public void setSqlGetMoviesByGenreId(String sqlGetMoviesByGenreId) {
+    public void setSqlGetMoviesByGenreId(@Value("${query.movie.sqlGetMoviesByGenreId}") String sqlGetMoviesByGenreId) {
         this.sqlGetMoviesByGenreId = sqlGetMoviesByGenreId;
     }
 

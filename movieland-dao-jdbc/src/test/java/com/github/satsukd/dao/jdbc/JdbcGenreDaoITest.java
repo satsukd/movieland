@@ -13,8 +13,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = TestJdbcConfiguration.class)
-@ContextConfiguration(locations = "classpath:spring/jdbc-context-liquibase-test.xml")
+@ContextConfiguration(classes = TestJdbcConfiguration.class)
 public class JdbcGenreDaoITest {
 
     @Autowired
