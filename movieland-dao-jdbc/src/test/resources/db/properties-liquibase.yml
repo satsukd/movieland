@@ -1,0 +1,10 @@
+jdbc:
+  driver : org.h2.Driver
+  url : jdbc:h2:~/liquibase-itest;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+  username : sa
+  password : sa
+  initialSize : 1
+  maxTotal : 2
+scheduler:
+  initialDelay : 1000
+  fixedDelay : 4000

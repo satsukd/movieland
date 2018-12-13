@@ -3,27 +3,26 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:task="http://www.springframework.org/schema/task"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/task
-    http://www.springframework.org/schema/task/spring-task.xsd">
+    http://www.springframework.org/schema/task/spring-task.xsd
+    http://www.springframework.org/schema/jdbc
+    http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
     <import resource="classpath:spring/query-container-context.xml"/>
 
     <task:annotation-driven/>
-
-    <context:component-scan
-            base-package="com.github.satsukd.dao.jdbc, com.github.satsukd.dao.cache">
-    </context:component-scan>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg index="0" ref="dataSource"/>
     </bean>
 
     <bean id="yamlProperties" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">
-        <property name="resources" value="classpath:db/properties.yml"/>
+        <property name="resources" value="classpath:db/properties-liquibase.yml"/>
     </bean>
 
     <context:property-placeholder properties-ref="yamlProperties"/>
@@ -37,5 +36,13 @@
         <property name="maxTotal" value="${jdbc.maxTotal}"/>
     </bean>
 
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="changeLog" value="classpath:db/liquibase/databaseChangeLog.xml"/>
+    </bean>
+
+    <context:component-scan
+            base-package="com.github.satsukd.dao.jdbc">
+    </context:component-scan>
 
 </beans>
