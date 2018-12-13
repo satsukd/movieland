@@ -4,6 +4,7 @@ import com.github.satsukd.dao.GenreDao;
 import com.github.satsukd.dao.mapper.GenreRowMapper;
 import com.github.satsukd.entity.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Repository
 public class JdbcGenreDao implements GenreDao {
     private static final GenreRowMapper GENRE_ROW_MAPPER = new GenreRowMapper();
+
 
     private String sqlGetAllGenres;
     private JdbcTemplate jdbcTemplate;
@@ -22,7 +24,7 @@ public class JdbcGenreDao implements GenreDao {
     }
 
     @Autowired
-    public void setSqlGetAllGenres(String sqlGetAllGenres) {
+    public void setSqlGetAllGenres(@Value("${query.genre.sqlGetAllGenres}") String sqlGetAllGenres) {
         this.sqlGetAllGenres = sqlGetAllGenres;
     }
 

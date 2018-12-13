@@ -1,5 +1,6 @@
 package com.github.satsukd.dao.jdbc;
 
+import com.github.satsukd.configuration.TestJdbcConfiguration;
 import com.github.satsukd.entity.Genre;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring/jdbc-context-liquibase-test.xml"})
+@ContextConfiguration(classes = TestJdbcConfiguration.class)
 public class JdbcGenreDaoITest {
 
     @Autowired
@@ -20,7 +21,7 @@ public class JdbcGenreDaoITest {
 
     @Test
     public void getAll() {
-        List<Genre> genres  = jdbcGenreDao.getAll();
+        List<Genre> genres = jdbcGenreDao.getAll();
         assertEquals(15, genres.size());
     }
 }
