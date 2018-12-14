@@ -1,9 +1,6 @@
 package com.github.satsukd.controller;
 
-import com.github.satsukd.dto.FiledNames;
-import com.github.satsukd.dto.MovieDTO;
-import com.github.satsukd.dto.MovieRequestParamsDto;
-import com.github.satsukd.dto.OrderClause;
+import com.github.satsukd.dto.*;
 import com.github.satsukd.entity.Movie;
 import com.github.satsukd.service.MovieService;
 import org.modelmapper.ModelMapper;
@@ -45,6 +42,13 @@ public class MovieController {
     public List<MovieDTO> getMovieByGenreId(@PathVariable int genreId, @ModelAttribute MovieRequestParamsDto requestParamsDto) {
         log.debug("MovieRequestParamsDto: {}", requestParamsDto);
         return wrapMovie(movieService.getByGenreId(genreId, requestParamsDto));
+    }
+
+    @GetMapping(path = {"/movie/{id}"})
+    public EnrichedMovieDTO getMovieById(@PathVariable int id) {
+        log.debug("getMovieById: {}", id);
+        Movie movie = movieService.getById(id);
+        return  modelMapper.map(movie, EnrichedMovieDTO.class);
     }
 
     private List<MovieDTO> wrapMovie(List<Movie> movies) {

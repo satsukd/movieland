@@ -23,6 +23,7 @@ public class JdbcMovieDao implements MovieDao {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private String sqlGetAllMovies;
+    private String sqlGetMovieById;
     private String sqlGetRandomMovies;
     private String sqlGetMoviesByGenreId;
     private JdbcTemplate jdbcTemplate;
@@ -47,6 +48,10 @@ public class JdbcMovieDao implements MovieDao {
         this.sqlGetMoviesByGenreId = sqlGetMoviesByGenreId;
     }
 
+    @Autowired
+    public void setSqlGetMovieById(@Value("${query.movie.sqlGetMovieById}") String sqlGetMovieById) {
+        this.sqlGetMovieById = sqlGetMovieById;
+    }
 
     @Override
     public List<Movie> getAll(MovieRequestParamsDto requestParamsDto) {
@@ -62,6 +67,11 @@ public class JdbcMovieDao implements MovieDao {
     @Override
     public List<Movie> getByGenreId(int genreId, MovieRequestParamsDto requestParamsDto) {
         return jdbcTemplate.query(applyRequestParams(sqlGetMoviesByGenreId, requestParamsDto), MOVIE_ROW_MAPPER, genreId);
+    }
+
+    @Override
+    public Movie getById(int id) {
+        return jdbcTemplate.queryForObject(sqlGetMovieById, MOVIE_ROW_MAPPER, id);
     }
 
     String applyRequestParams(String query, MovieRequestParamsDto requestParamsDto) {
