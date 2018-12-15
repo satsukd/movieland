@@ -40,7 +40,7 @@ public class JdbcGenreDao implements GenreDao {
     }
 
     @Override
-    public List<Genre> getByMovieId(int movieId) {
+    public List<Genre> getByMovieId(long movieId) {
         return jdbcTemplate.query(sqlGetGenresByMovieId, GENRE_ROW_MAPPER, movieId);
     }
 }

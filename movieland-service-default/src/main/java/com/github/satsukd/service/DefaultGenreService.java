@@ -22,7 +22,7 @@ public class DefaultGenreService implements GenreService {
     }
 
     @Override
-    public List<Genre> getByMovieId(int movieId) {
+    public List<Genre> getByMovieId(long movieId) {
         return genreDao.getByMovieId(movieId);
     }
 }

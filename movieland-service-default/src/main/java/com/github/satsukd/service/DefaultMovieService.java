@@ -4,8 +4,6 @@ import com.github.satsukd.dao.MovieDao;
 import com.github.satsukd.dto.MovieRequestParamsDto;
 import com.github.satsukd.entity.Movie;
 import com.github.satsukd.service.enrich.MovieEnrichService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +11,6 @@ import java.util.List;
 
 @Service
 public class DefaultMovieService implements MovieService {
-    private final Logger log = LoggerFactory.getLogger(getClass());
-
     private MovieDao movieDao;
     private MovieEnrichService movieEnrichService;
 

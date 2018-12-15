@@ -7,5 +7,5 @@ import java.util.List;
 public interface GenreService {
     List<Genre> getAll();
 
-    List<Genre> getByMovieId(int movieId);
+    List<Genre> getByMovieId(long movieId);
 }

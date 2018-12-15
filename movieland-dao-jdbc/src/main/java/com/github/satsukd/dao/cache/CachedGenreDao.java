@@ -29,7 +29,7 @@ public class CachedGenreDao implements GenreDao {
     }
 
     @Override
-    public List<Genre> getByMovieId(int movieId) {
+    public List<Genre> getByMovieId(long movieId) {
         return genreDao.getByMovieId(movieId);
     }
 

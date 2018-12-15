@@ -6,45 +6,89 @@ import com.github.satsukd.service.GenreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
 @Service
 public class MovieEnrichService {
-
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private static ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
-
-    static {
-        executor.setCorePoolSize(10);
-        executor.setMaximumPoolSize(20);
-        executor.setKeepAliveTime(60, TimeUnit.MINUTES);
-    }
-
-    private static final int ENRICHMENT_TIMEOUT = 5;
     private GenreService genreService;
+    private int enrichTimeoutMilSeconds;
+    private int executorCorePollSize;
+    private int executorMaxPollSize;
+    private int executorKeepAliveMilSeconds;
+
+
+    public void enrich(Movie movie) {
+        List<Callable<Movie>> tasks = new ArrayList<>();
+
+        MovieEnrichmentTask movieWithGenresEnrichment = new MovieEnrichmentTask(movie, movie1 -> {
+            List<Genre> genreList = genreService.getByMovieId(movie1.getId());
+            movie1.setGenres(genreList);
+        }, "genres");
+
+        tasks.add(movieWithGenresEnrichment);
+
+        MovieEnrichmentTask movieWithCountyEnrichment = new MovieEnrichmentTask(movie, movie1 -> {
+            List<Genre> genreList = genreService.getByMovieId(movie1.getId());
+            movie1.setGenres(genreList);
+        }, "counties");
+
+        tasks.add(movieWithCountyEnrichment);
+
+        try {
+            logger.debug("started movie {} enrichment ", movie.getId());
+            List<Future<Movie>> movieFutures = executor.invokeAll(tasks, enrichTimeoutMilSeconds, TimeUnit.MILLISECONDS);
+            long finishedTasks = movieFutures.stream().filter(future -> !future.isCancelled() && future.isDone()).count();
+            logger.info("ended movie {} enrichment, {} tasks were finished, {} tasks were failed ", movie.getId(), finishedTasks, movieFutures.size() - finishedTasks);
+        } catch (InterruptedException e) {
+            logger.info("movie {} enrichment was interrupted ", movie.getId());
+            logger.debug("ERROR: {}", e);
+        }
+    }
 
     @Autowired
     public void setGenreService(GenreService genreService) {
         this.genreService = genreService;
     }
 
-    public void enrich(Movie movie) {
-        logger.debug("started enrichment for movieId = {}", movie.getId());
+    @PostConstruct
+    public void init() {
+        executor.setCorePoolSize(executorCorePollSize);
+        executor.setMaximumPoolSize(executorMaxPollSize);
+        executor.setKeepAliveTime(executorKeepAliveMilSeconds, TimeUnit.MILLISECONDS);
+    }
 
-        Callable<List<Genre>> genreCallable = () -> genreService.getByMovieId((int) movie.getId());
+    @PreDestroy
+    public void destroy() {
+        executor.shutdown();
+    }
 
-        Future<List<Genre>> genresFuture = executor.submit(genreCallable);
 
-        try {
-            List<Genre> genres = genresFuture.get(ENRICHMENT_TIMEOUT, TimeUnit.SECONDS);
-            movie.setGenres(genres);
-        } catch (Exception e) {
-            logger.debug("failed enrich movieId {} with genres ", movie.getId());
-        }
+    @Value("${movie.enrichTimeoutMilSeconds}")
+    public void setEnrichTimeoutMilSeconds(int enrichTimeoutMilSeconds) {
+        this.enrichTimeoutMilSeconds = enrichTimeoutMilSeconds;
+    }
 
-        logger.debug("enriched movie = {}", movie);
+    @Value("${executor.executorCorePollSize}")
+    public void setExecutorCorePollSize(int executorCorePollSize) {
+        this.executorCorePollSize = executorCorePollSize;
+    }
+
+    @Value("${executor.executorMaxPollSize}")
+    public void setExecutorMaxPollSize(int executorMaxPollSize) {
+        this.executorMaxPollSize = executorMaxPollSize;
+    }
+
+    @Value("${executor.executorKeepAliveMilSeconds}")
+    public void setExecutorKeepAliveMilSeconds(int executorKeepAliveMilSeconds) {
+        this.executorKeepAliveMilSeconds = executorKeepAliveMilSeconds;
     }
 }
