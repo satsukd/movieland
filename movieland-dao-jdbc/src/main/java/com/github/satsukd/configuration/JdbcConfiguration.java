@@ -16,7 +16,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import javax.sql.DataSource;
 
 @Configuration
-//@ImportResource("classpath:spring/old-query-container-context.xml")
 @EnableScheduling
 @ComponentScan(basePackages = {"com.github.satsukd.dao.jdbc", "com.github.satsukd.dao.cache"})
 public class JdbcConfiguration {
@@ -35,6 +34,7 @@ public class JdbcConfiguration {
         logger.debug("called propertySourcesPlaceholder bean");
         PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
         propertySourcesPlaceholderConfigurer.setProperties(yamlPropertiesFactoryBean.getObject());
+        propertySourcesPlaceholderConfigurer.setIgnoreUnresolvablePlaceholders(true);
         return propertySourcesPlaceholderConfigurer;
     }
 

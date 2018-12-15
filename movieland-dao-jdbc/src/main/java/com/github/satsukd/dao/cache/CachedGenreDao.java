@@ -28,6 +28,11 @@ public class CachedGenreDao implements GenreDao {
         return new ArrayList<>(genres);
     }
 
+    @Override
+    public List<Genre> getByMovieId(long movieId) {
+        return genreDao.getByMovieId(movieId);
+    }
+
     @Autowired
     public CachedGenreDao(@Qualifier("jdbcGenreDao") GenreDao genreDao) {
         this.genreDao = genreDao;

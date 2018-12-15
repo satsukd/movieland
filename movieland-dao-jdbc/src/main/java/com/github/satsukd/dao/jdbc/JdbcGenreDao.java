@@ -16,6 +16,7 @@ public class JdbcGenreDao implements GenreDao {
 
 
     private String sqlGetAllGenres;
+    private String sqlGetGenresByMovieId;
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -28,8 +29,18 @@ public class JdbcGenreDao implements GenreDao {
         this.sqlGetAllGenres = sqlGetAllGenres;
     }
 
+    @Autowired
+    public void setSqlGetGenresByMovieId(@Value("${query.genre.sqlGetGenresByMovieId}") String sqlGetGenresByMovieId) {
+        this.sqlGetGenresByMovieId = sqlGetGenresByMovieId;
+    }
+
     @Override
     public List<Genre> getAll() {
         return jdbcTemplate.query(sqlGetAllGenres, GENRE_ROW_MAPPER);
+    }
+
+    @Override
+    public List<Genre> getByMovieId(long movieId) {
+        return jdbcTemplate.query(sqlGetGenresByMovieId, GENRE_ROW_MAPPER, movieId);
     }
 }

@@ -1,0 +1,6 @@
+movie:
+  enrichTimeoutMilSeconds : 5000
+executor:
+  executorKeepAliveMilSeconds : 15000
+  executorMaxPollSize : 30
+  executorCorePollSize : 1
